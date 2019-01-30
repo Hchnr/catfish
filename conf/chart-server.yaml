@@ -1,0 +1,25 @@
+port: 9420
+log:
+  level: DEBUG # DEBUG, INFO, WARN, ERROR
+  encoding: json
+  outputPaths: ['logs/catfish.log'] # only active in non-debug mode
+  errorOutputPaths: ['logs/catfish.err.log'] # only active in non-debug mode
+gin:
+  logfile: logs/access.log
+cluster:
+  # find pod only in these namespaces
+  namespaces:
+    - default
+    - test
+    - kafka
+    - rook-ceph
+  # don't update pods the name of which contains 'catfish'
+  protects:
+    - catfish
+    - redis
+    - elasticsearch
+  duration: 6h # update a new pod for how long
+  isPrtDep: true # [true]: keep deployment having at least 1 pod
+  isPrtSingleDep: true # [true]: don't update deployments which have single pod 
+  isUptSinglePod: false # [true]: update pods which have no replicaSet
+

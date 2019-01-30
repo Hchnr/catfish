@@ -1,0 +1,8 @@
+port: 9421
+log:
+    level: [[ LOG_LEVEL ]] # DEBUG, INFO, WARN, ERROR
+    encoding: json
+    outputPaths: ['logs/[[ SERVICE_NAME ]].log'] # only active in non-debug mode
+    errorOutputPaths: ['logs/[[ SERVICE_NAME ]].err.log'] # only active in non-debug mode
+gin:
+    logfile: logs/access.log
